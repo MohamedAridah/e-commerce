@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import { Jost } from "next/font/google";
+import { Jost, Inter } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const jost = Jost({
   variable: "--font-jost",
@@ -8,8 +12,8 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Nike",
-  description: "An e-commerce platform for Nike shoes",
+  title: "Groomi",
+  description: "An e-commerce platform for fashion and lifestyle products.",
 };
 
 export default function RootShell({
@@ -18,8 +22,11 @@ export default function RootShell({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${jost.className} antialiased`}>{children}</body>
+    <html lang="en" className={inter.variable}>
+      <body className={`${jost.className} antialiased`}>
+        <NuqsAdapter>{children}</NuqsAdapter>
+        <Toaster />
+      </body>
     </html>
   );
 }

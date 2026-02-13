@@ -40,7 +40,7 @@ export default function Card({
     <article
       className={`group rounded-xl bg-light-100 ring-1 ring-light-300 transition-colors hover:ring-dark-500 ${className}`}
     >
-      <div className="relative aspect-square overflow-hidden rounded-t-xl bg-light-200">
+      <div className="relative aspect-square overflow-hidden rounded-t-xl bg-light-200 ">
         <Image
           src={imageSrc}
           alt={imageAlt}
