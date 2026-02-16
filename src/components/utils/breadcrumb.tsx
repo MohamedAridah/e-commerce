@@ -4,32 +4,42 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
+  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-interface BreadCrumbUIProps {
-  breadCrumbs: {
-    label: string;
-    href: string;
-    className?: string;
-  }[];
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
 }
 
-export default function BreadCrumbUI({ breadCrumbs }: BreadCrumbUIProps) {
+type Props = {
+  breadcrumbs: BreadcrumbItem[];
+} & React.ComponentProps<"nav">;
+
+export default function BreadCrumbUI({ breadcrumbs, ...props }: Props) {
+  const breadcrumbsCount = breadcrumbs.length;
   return (
-    <Breadcrumb>
+    <Breadcrumb className={cn(props.className)} {...props}>
       <BreadcrumbList>
-        {breadCrumbs.map((breadCrumb, index, array) => (
-          <React.Fragment key={index}>
-            <BreadcrumbItem key={index}>
-              <BreadcrumbLink className={breadCrumb.className} asChild>
-                <Link href={breadCrumb.href}>{breadCrumb.label}</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            {array.length === ++index ? null : <BreadcrumbSeparator />}
-          </React.Fragment>
-        ))}
+        {breadcrumbs.map((breadcrumb, index) => {
+          const isLastItem = breadcrumbsCount === ++index;
+          return (
+            <React.Fragment key={index}>
+              <BreadcrumbItem key={index}>
+                {!isLastItem ? (
+                  <BreadcrumbLink href={breadcrumb.href}>
+                    {breadcrumb.label}
+                  </BreadcrumbLink>
+                ) : (
+                  <BreadcrumbPage>{breadcrumb.label}</BreadcrumbPage>
+                )}
+              </BreadcrumbItem>
+              {isLastItem ? null : <BreadcrumbSeparator />}
+            </React.Fragment>
+          );
+        })}
       </BreadcrumbList>
     </Breadcrumb>
   );

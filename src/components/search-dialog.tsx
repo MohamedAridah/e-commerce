@@ -29,14 +29,15 @@ export function SearchDialog() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [_, setSearchParams] = useFilters();
 
-  const clearSearchInput = () =>
-    setSearchParams((prev) => ({ ...prev, search: null }));
+  const clearSearchInput = () => setSearchParams({ search: null });
 
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Trigger />
+          <Button variant="ghost" size="icon" className="rounded-full relative">
+            <SearchIcon />
+          </Button>
         </DialogTrigger>
         <DialogContent
           className="sm:max-w-2xl p-0 -translate-y-1/4 top-1/4 gap-0"
@@ -57,7 +58,9 @@ export function SearchDialog() {
   return (
     <Drawer direction="top" open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Trigger />
+        <Button variant="ghost" size="icon" className="rounded-full relative">
+          <SearchIcon />
+        </Button>
       </DrawerTrigger>
       <DrawerContent className="data-[vaul-drawer-direction=top]:h-full data-[vaul-drawer-direction=top]:max-h-[100vh]  data-[vaul-drawer-direction=top]:rounded-e-none">
         <DrawerHeader className="text-left p-0 hidden">
@@ -71,23 +74,6 @@ export function SearchDialog() {
     </Drawer>
   );
 }
-
-const Trigger = React.forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->((props, ref) => {
-  return (
-    <Button
-      ref={ref}
-      variant="ghost"
-      size="icon"
-      className="rounded-full relative"
-      {...props}
-    >
-      <SearchIcon />
-    </Button>
-  );
-});
 
 const Content = ({
   clearSearch,
@@ -107,9 +93,9 @@ const Content = ({
           </Button>
         </DrawerClose>
       </div>
-   <div className="p-4 max-h-[80vh] overflow-y-auto no-scrollbar">
-    <h2>Render filtered producteds here...</h2>
-   </div>
+      <div className="p-4 max-h-[80vh] overflow-y-auto no-scrollbar">
+        <h2>Render filtered producteds here...</h2>
+      </div>
     </>
   );
 };

@@ -8,7 +8,7 @@ import {
   loadFilters,
 } from "@/lib/search-params/search-params";
 import FilterActiveBadges from "@/components/filter-active-badge";
-import { Layers3Icon, ShirtIcon } from "lucide-react";
+import { Layers3Icon } from "lucide-react";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -127,7 +127,7 @@ export default async function ProductsPage({
 function NoProductsFound() {
   return (
     <div className="flex flex-col items-center gap-2 mt-[15vh] p-8 text-center">
-      <Layers3Icon className="size-10 text-gray-700"/>
+      <Layers3Icon className="size-10 text-gray-700" />
       <p className="text-body text-dark-700">No products match your filters.</p>
     </div>
   );

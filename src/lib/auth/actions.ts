@@ -8,7 +8,7 @@ import { and, eq, lt } from "drizzle-orm";
 import { randomUUID } from "crypto";
 import { signInSchema, signUpSchema } from "@/lib/validation/auth";
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
+
 
 const COOKIE_OPTIONS = {
   httpOnly: true as const,

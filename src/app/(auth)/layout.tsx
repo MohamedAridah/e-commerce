@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="space-y-4">
           <h2 className="text-heading-2">Be Groomi!</h2>
             <p className="max-w-md text-lead text-light-300">
-            Join Thousands who embrace style and comfort with Groomi's inclusive collection for everyone.
+            Join Thousands who embrace style and comfort with Groomi&apos;s inclusive collection for everyone.
             </p>
           <div className="flex gap-2" aria-hidden="true">
             <span className="h-2 w-2 rounded-full bg-light-100/90" />

@@ -44,6 +44,19 @@ export default function SearchInput({ classNameInput, ...props }: Props) {
         isLoading={isPending}
         className="size-4 absolute end-3 text-muted-foreground"
       />
+
+      {search && (
+        <button
+          type="button"
+          className={cn(
+            "absolute text-muted-foreground cursor-pointer transition-all",
+            isPending ? "end-8.5" : "end-4",
+          )}
+          onClick={() => setSearchParams({ search: null })}
+        >
+          clear
+        </button>
+      )}
     </div>
   );
 }

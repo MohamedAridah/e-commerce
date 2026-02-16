@@ -14,6 +14,7 @@ import { Checkbox } from "./ui/checkbox";
 import { useFilters } from "@/lib/search-params/search-params";
 import { FilterIcon } from "lucide-react";
 import { toggleFilter } from "@/lib/utils/helpers";
+import { useSearchParams } from "next/navigation";
 
 const GENDERS = ["men", "women", "unisex"] as const;
 const SIZES = ["XS", "S", "M", "L", "XL"] as const;
@@ -68,11 +69,21 @@ export default function FiltersSheet() {
 
 export function FilterHeader() {
   const [{}, setSearchParams] = useFilters();
+  const params = useSearchParams();
+  const filtersCount = params.size;
+
   const clearAllFilters = () => setSearchParams(null);
 
   return (
     <div className="mb-2 flex items-center justify-between">
-      <h3 className="text-body-medium">Filters</h3>
+      <h3 className="text-body-medium flex items-center gap-1.5">
+        Filters
+        {filtersCount > 0 && (
+          <p className="flex items-center justify-center gap-1 rounded-full border border-light-300 size-6 p-1 text-caption text-dark-900 capitalize">
+            {filtersCount}
+          </p>
+        )}
+      </h3>
       <Button
         variant={"link"}
         className="text-caption text-dark-700 underline p-0 underline-offset-2"
@@ -129,7 +140,11 @@ export function FilterCategories() {
                   id={`size-${size}`}
                   checked={sizeSlugs.includes(size.toLowerCase())}
                   onCheckedChange={() =>
-                    toggleFilter(setSearchParams, "sizeSlugs", size.toLowerCase())
+                    toggleFilter(
+                      setSearchParams,
+                      "sizeSlugs",
+                      size.toLowerCase(),
+                    )
                   }
                   className="hover:cursor-pointer"
                 />
@@ -174,7 +189,6 @@ export function FilterCategories() {
         title={`Price ${priceRanges.length > 0 ? `(${priceRanges.length})` : ""}`}
         groupKey="price"
         className="border-0"
-        
       >
         <ul className="space-y-2">
           {PRICES.map((price) => {

@@ -22,10 +22,12 @@ export default function RootShell({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className={`${jost.className} antialiased`}>
-        <NuqsAdapter>{children}</NuqsAdapter>
-        <Toaster />
+        <NuqsAdapter>
+          {children}
+          <Toaster />
+        </NuqsAdapter>
       </body>
     </html>
   );
